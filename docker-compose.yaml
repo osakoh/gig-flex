@@ -1,0 +1,13 @@
+version: '3.9'  # Specifies the Docker Compose file format version.
+services:  # Each service runs in a separate container.
+  redis:  # The name of the service.
+    container_name: redis_container  # specifies a custom container name instead of a generated one.
+    image: redis:alpine  # The Docker image to use for the container. Here, it's using the Alpine version of Redis, which is smaller and more secure than the standard version.
+    restart: always  # Configures the restart policy for the container. "always" means the container will restart if it stops for any reason.
+    ports:  # Maps ports between the host and the container.
+      - '6379:6379'  # Binds port 6379 on the host to port 6379 in the container, allowing network access to Redis.
+    command: redis-server --loglevel warning  # Overrides the default command run in the container. Here, it starts the Redis server with a log level of "warning".
+    volumes:  # Mounts volumes into the container, for persistent storage or sharing directories.
+      - ./docker-volumes/cache:/data  # Maps a local directory (./docker-volumes/cache) to the /data directory in the container. This is often used for data persistence.
+
+ 
